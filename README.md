@@ -11,12 +11,12 @@ Always refer to [SPlisHSPlasH Documentation](https://splishsplash.readthedocs.io
 The basic idea of SPlisHSPlasH is giving it a **.json** file which defines all the things including simulation method you'd like to use and initial scene you'd like to begin with. SPHSimulator in the *bin* directory will choose the corresponding model to run simulation. The state like position and velocity of particles will be recorded with a fixed frequency (but the version contained in this repository records the state data every time it updates). The recorded data will be stored in *bin/output/*
 ___
 ### Fluid Initialization
-Fluid can be initialized with *FluidBlocks* or *FluidModels*. *FluidBlocks* defines a fluid block with coordinates, while with *FluidModels* you can directly give particle data to initialize it (.bgeo file). Details can be found in SPlisHSPlasH Documentation.
+Fluid can be initialized with *FluidBlocks* or *FluidModels*. *FluidBlocks* defines a fluid block with coordinates, but be careful there will always be a leave-out of one diameter of a particle. For instance, we set radius of particle as 0.025 and set coordinates on x-axis as [-1, 1], it will actually generate (2-0.025*2)/0.025 = 78 particles on x-axis. While with *FluidModels* you can directly give particle data to initialize it (.bgeo file). Details can be found in SPlisHSPlasH Documentation.
 ____
 ### Volume Sampling tool
 In *bin* directory, there are tools like *VolumeSampling* and *SurfaceSampling*. They are not mentioned much in Documentation, but they might be useful for you, especially *VolumeSampling*. 
 
-*VolumeSampling* can generate .bgeo file by sampling on a specific .obj file or on a region specified by corrdinates. You may refer to the source code of it for more details. In main function there are parameters you can input.
+*VolumeSampling* can generate .bgeo file by sampling on a specific .obj file or on a region specified by corrdinates. When set region, there will be a leave-out of one diameter of particle as mentioned above, since actually *SPHSimulator* will call *VolumeSampling* when you set *FluidBlocks* You may refer to the source code of it for more details. In main function there are parameters you can input.
 ____
 ## Tips on further modification
 
